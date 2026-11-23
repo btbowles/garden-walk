@@ -6,7 +6,7 @@ static func plan(start: Vector3, goal: Vector3) -> Array[Vector3]:
     if start == goal:
         return []
 
-    if abs(goal.x) > 5.5 or abs(goal.z) > 4.5 or (abs(goal.x) < 1.5 and abs(goal.z) < 1.5):
+    if abs(goal.x) > 79.5 or abs(goal.z) > 79.5 or (abs(goal.x) < 1.5 and abs(goal.z) < 1.5):
         return []
 
     var fixed_aabb = AABB(Vector3(-1.499, -1, -1.499), Vector3(2.998, 2, 2.998))

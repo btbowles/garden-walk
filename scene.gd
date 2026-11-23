@@ -1,6 +1,6 @@
 extends Node3D
 
-const FLOOR_HALF := Vector2(6.0, 5.0)
+const FLOOR_HALF := Vector2(80.0, 80.0)
 const PROP_HALF := Vector2(1.0, 1.0)
 const PLAYER_RADIUS := 0.5
 const SPEED := 4.0
@@ -25,7 +25,7 @@ func _ready() -> void:
 	light.shadow_enabled = true
 	add_child(light)
 
-	_box(self, Vector3(0, -0.3, 0), Vector3(12, 0.6, 10), Color("#6eaa73"))
+	_box(self, Vector3(0, -0.3, 0), Vector3(160, 0.6, 160), Color("#6eaa73"))
 	var apple_tree = preload("res://apple_tree.gd")
 	var apple_tree_instance = apple_tree.new()
 	apple_tree_instance.name = "AppleTree"
@@ -47,7 +47,7 @@ func _ready() -> void:
 	camera.projection = Camera3D.PROJECTION_ORTHOGONAL
 	camera.keep_aspect = Camera3D.KEEP_WIDTH
 	camera.size = maxf(17.4, 11.0 * get_viewport().get_visible_rect().size.aspect())
-	camera.position = Vector3(8, 10, 11)
+	camera.position = Vector3(32, 40, 44)
 	add_child(camera)
 	camera.look_at(Vector3.ZERO)
 	camera.make_current()

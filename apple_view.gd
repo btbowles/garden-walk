@@ -10,6 +10,7 @@ func _ready():
         var root = Node3D.new()
         root.name = "Apple" + str(i + 1)
         root.position = Vector3(4, 0, 3.5) if i == 0 else Vector3(4, 0, -3) if i == 1 else Vector3(0, 0, -3.5) if i == 2 else Vector3(-4, 0, -3) if i == 3 else Vector3(-4, 0, 3)
+        root.hide()
         add_child(root)
         apple_roots.append(root)
 

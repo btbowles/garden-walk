@@ -18,6 +18,16 @@ func _physics_process(delta):
 
     if apple_positions.is_empty():
         place_apples()
+    else:
+        var view_camera := get_viewport().get_camera_3d()
+        if apple_positions.is_empty():
+            place_apples()
+        else:
+            for apple in apple_roots:
+                if apple.visible and not preload("res://apple_layout.gd").is_visible(view_camera, apple.global_position):
+                    place_apples()
+                    get_parent().tap_walk.clear()
+                    break
 
     var index = -1
     var last_index = previous_contact
@@ -65,7 +75,14 @@ func get_current_positions():
 
 func place_apples():
     var player = get_parent().get_node_or_null("Player")
-    if player:
-        apple_positions = preload("res://apple_layout.gd").choose(player.global_position, apple_positions)
+    var camera = get_viewport().get_camera_3d()
+    if not player or not camera:
+        return
+    var apple_layout = preload("res://apple_layout.gd")
+    var positions = apple_layout.choose(camera, player.global_position, apple_positions)
+    if positions.size() != 5:
+        return
+    apple_positions = positions
     for i in range(5):
         apple_roots[i].global_position = apple_positions[i]
+        apple_roots[i].visible = i >= count
