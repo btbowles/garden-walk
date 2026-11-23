@@ -2,7 +2,7 @@
 
 Walk around a small garden and collect the five numbered apples in order. Walk into an apple to collect it. Each correct pickup appears in the collection row across the top. Touching the wrong apple returns all five to the garden.
 
-- Move with WASD or the arrow keys.
+- Tap an apple or a walkable spot to automatically walk there, click with a mouse for the same behaviour, and use WASD or arrow keys on a keyboard.
 - Press R to start a new round.
 
 ## Run locally

@@ -68,10 +68,23 @@ func _axis(positive: Key, positive_arrow: Key, negative: Key, negative_arrow: Ke
 func _walkable(at: Vector3) -> bool:
 	return absf(at.x) >= PROP_HALF.x + PLAYER_RADIUS or absf(at.z) >= PROP_HALF.y + PLAYER_RADIUS
 
+const TapWalk = preload("res://tap_walk.gd")
+var tap_walk = TapWalk.new()
+
+func _unhandled_input(event: InputEvent) -> void:
+	if player:
+		tap_walk.handle_input(event, get_viewport().get_camera_3d(), player.position, get_node_or_null("Apples"))
+
 func _physics_process(delta: float) -> void:
 	var direction := Vector3(_axis(KEY_D, KEY_RIGHT, KEY_A, KEY_LEFT), 0, _axis(KEY_S, KEY_DOWN, KEY_W, KEY_UP)).normalized()
 	var previous := player.position
 	var step := direction * SPEED * delta
+
+	if direction == Vector3.ZERO:
+		step = tap_walk.advance(previous, SPEED * delta)
+		direction = step.normalized()
+	else:
+		tap_walk.clear()
 	var next_x := Vector3(clampf(previous.x + step.x, -FLOOR_HALF.x + PLAYER_RADIUS, FLOOR_HALF.x - PLAYER_RADIUS), 0, previous.z)
 	if _walkable(next_x):
 		player.position = next_x

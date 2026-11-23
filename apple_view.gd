@@ -22,8 +22,12 @@ func _ready():
 
         var label = Label3D.new()
         label.text = str(i + 1)
-        label.position = Vector3(0, 1.15, 0)
+        label.position = Vector3(0, 1.55, 0)
         label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+        label.font_size = 92
+        label.pixel_size = 0.014
+        label.outline_size = 14
+        label.no_depth_test = true
         label.modulate = Color(1, 1, 1)
         label.outline_modulate = Color(0, 0, 0)
         root.add_child(label)
@@ -33,7 +37,10 @@ func _ready():
     add_child(v_box_container)
 
     status_label = Label.new()
-    status_label.text = "Walk into 1-5 and press R to replay"
+    status_label.text = "Tap to walk. Collect apples 1–5."
+    status_label.add_theme_font_size_override("font_size", 32)
+    status_label.add_theme_color_override("font_outline_color", Color.BLACK)
+    status_label.add_theme_constant_override("outline_size", 6)
     v_box_container.add_child(status_label)
 
     h_box_container = HBoxContainer.new()
@@ -52,7 +59,8 @@ func render_progress(count: int, message: String):
         style.bg_color = Color(1, 0, 0)
         style.set_corner_radius_all(8)
         label.add_theme_stylebox_override("normal", style)
-        label.custom_minimum_size = Vector2(32, 30)
+        label.custom_minimum_size = Vector2(64, 54)
+        label.add_theme_font_size_override("font_size", 34)
         label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
         label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
         h_box_container.add_child(label)
