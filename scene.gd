@@ -26,9 +26,10 @@ func _ready() -> void:
 	add_child(light)
 
 	_box(self, Vector3(0, -0.3, 0), Vector3(12, 0.6, 10), Color("#6eaa73"))
-	_box(self, Vector3(0, 0.04, 0), Vector3(2, 0.08, 2), Color("#d5b680"))
-	_box(self, Vector3(0, 0.72, 0), Vector3(1.9, 1.4, 1.9), Color("#b4684f"))
-	_box(self, Vector3(0, 1.52, 0), Vector3(2, 0.2, 2), Color("#efb95f"))
+	var apple_tree = preload("res://apple_tree.gd")
+	var apple_tree_instance = apple_tree.new()
+	apple_tree_instance.name = "AppleTree"
+	add_child(apple_tree_instance)
 	for x in [-4.0, -2.0, 2.0, 4.0]:
 		_box(self, Vector3(x, 0.005, -3.4), Vector3(0.72, 0.01, 0.48), Color("#cbd1a0"))
 
@@ -44,11 +45,13 @@ func _ready() -> void:
 
 	var camera := Camera3D.new()
 	camera.projection = Camera3D.PROJECTION_ORTHOGONAL
-	camera.size = 15.0
+	camera.keep_aspect = Camera3D.KEEP_WIDTH
+	camera.size = maxf(17.4, 11.0 * get_viewport().get_visible_rect().size.aspect())
 	camera.position = Vector3(8, 10, 11)
 	add_child(camera)
 	camera.look_at(Vector3.ZERO)
 	camera.make_current()
+	get_viewport().size_changed.connect(func(): camera.size = maxf(17.4, 11.0 * get_viewport().get_visible_rect().size.aspect()))
 
 func _box(parent: Node3D, at: Vector3, dimensions: Vector3, color: Color) -> MeshInstance3D:
 	var node := MeshInstance3D.new()

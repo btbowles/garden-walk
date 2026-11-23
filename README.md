@@ -1,6 +1,6 @@
 # Garden Walk · Apple Challenge
 
-Walk around a small garden and collect the five numbered apples in order. Walk into an apple to collect it. Each correct pickup appears in the collection row across the top. Touching the wrong apple returns all five to the garden.
+Walk around a small garden and collect the five numbered apples in order. Walk into an apple to collect it. Each correct pickup appears in the collection row across the top. Touching the wrong apple returns all five to the garden. Apples appear in random visible positions, a wrong pickup rerolls all positions, and a win shows a message then restarts after two seconds.
 
 - Tap an apple or a walkable spot to automatically walk there, click with a mouse for the same behaviour, and use WASD or arrow keys on a keyboard.
 - Press R to start a new round.
